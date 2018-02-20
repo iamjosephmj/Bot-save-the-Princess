@@ -1,6 +1,6 @@
 # Bot-save-the-Princess
 
-Princess 'P' is trapped inside a Box-World. The program is designed in such a way that a Bot 'B' saves the princess with minimim path cost.
+Princess 'P' is trapped inside a Box-World. The program is designed in such a way that a Bot 'B' saves the princess with minimim path.
 
 # How-to-play
 
