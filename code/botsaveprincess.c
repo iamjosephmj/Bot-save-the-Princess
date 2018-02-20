@@ -4,7 +4,7 @@
 
 typedef struct game_board {
     char board[100][100];
-    int traversed[100][100];
+    int is_traversed[100][100];
     int r, c;
 } board;
 
@@ -62,7 +62,7 @@ board input_data(board Board) {
         for (j = 0; j < Board.c; j++) {
             scanf("%c", &ch);
             Board.board[i][j] = ch;
-            Board.traversed[i][j] = 0;
+            Board.is_traversed[i][j] = 0;
             if (ch == 'B') {
                 bot_r = i;
                 bot_c = j;
@@ -83,12 +83,13 @@ struct node *new() {
 
 
 void path(struct node *n);
+
 /* This function is to traverse through all the columns and rows of the board */
 void traverse(board Board, struct node *n) {
 
     if (n->c - 1 >= 0) {
-        if (Board.traversed[n->r][n->c - 1] == 0 && Board.board[n->r][n->c - 1] != '/') {
-            Board.traversed[n->r][n->c - 1] = 1;
+        if (Board.is_traversed[n->r][n->c - 1] == 0 && Board.board[n->r][n->c - 1] != '/') {
+            Board.is_traversed[n->r][n->c - 1] = 1;
             n->left = new();
             (n->left)->data = 'L';
             (n->left)->left = NULL;
@@ -108,8 +109,8 @@ void traverse(board Board, struct node *n) {
 
     }
     if (n->c + 1 < Board.r) {
-        if (Board.traversed[n->r][n->c + 1] == 0 && Board.board[n->r][n->c + 1] != '/') {
-            Board.traversed[n->r][n->c + 1] = 1;
+        if (Board.is_traversed[n->r][n->c + 1] == 0 && Board.board[n->r][n->c + 1] != '/') {
+            Board.is_traversed[n->r][n->c + 1] = 1;
             n->right = new();
             (n->right)->data = 'R';
             (n->right)->left = NULL;
@@ -129,8 +130,8 @@ void traverse(board Board, struct node *n) {
 
     }
     if (n->r - 1 >= 0) {
-        if (Board.traversed[n->r - 1][n->c] == 0 && Board.board[n->r - 1][n->c] != '/') {
-            Board.traversed[n->r - 1][n->c] = 1;
+        if (Board.is_traversed[n->r - 1][n->c] == 0 && Board.board[n->r - 1][n->c] != '/') {
+            Board.is_traversed[n->r - 1][n->c] = 1;
             n->top = new();
             (n->top)->data = 'T';
             (n->top)->left = NULL;
@@ -149,8 +150,8 @@ void traverse(board Board, struct node *n) {
         }
     }
     if (n->r + 1 < Board.c) {
-        if (Board.traversed[n->r + 1][n->c] == 0 && Board.board[n->r + 1][n->c] != '/') {
-            Board.traversed[n->r + 1][n->c] = 1;
+        if (Board.is_traversed[n->r + 1][n->c] == 0 && Board.board[n->r + 1][n->c] != '/') {
+            Board.is_traversed[n->r + 1][n->c] = 1;
             n->bottom = new();
             (n->bottom)->data = 'B';
             (n->bottom)->left = NULL;
@@ -183,7 +184,7 @@ struct node *construct_tree(board Board) {
     start->right = NULL;
     start->top = NULL;
     start->bottom = NULL;
-    b.traversed[bot_r][bot_c] = 1;
+    b.is_traversed[bot_r][bot_c] = 1;
     traverse(b, start);
 
     return start;
@@ -224,7 +225,8 @@ void print_shortest_path(char *string) {
             case 'R':
                 printf("RIGHT ");
                 break;
-            default:break;
+            default:
+                break;
         }
     }
     printf("\n");
