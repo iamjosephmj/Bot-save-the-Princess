@@ -24,7 +24,7 @@ struct node {
 static char shortest_path[100] = "";
 static int cnt = 100;
 
-
+/* This function is to print the details of the game */
 void print_game_details() {
 
     printf("\n****************************************************************************************\n");
@@ -52,6 +52,7 @@ void print_game_details() {
 
 }
 
+/* This function inputs the data into the game board */
 board input_data(board Board) {
 
     char ch;
@@ -82,7 +83,7 @@ struct node *new() {
 
 
 void path(struct node *n);
-
+/* This function is to traverse through all the columns and rows of the board */
 void traverse(board Board, struct node *n) {
 
     if (n->c - 1 >= 0) {
@@ -169,7 +170,7 @@ void traverse(board Board, struct node *n) {
     }
 }
 
-
+/* This function is to construct the tree structure for the board*/
 struct node *construct_tree(board Board) {
 
     board b = Board;
@@ -188,6 +189,7 @@ struct node *construct_tree(board Board) {
     return start;
 }
 
+/* This function finds the shortest path for the bot to reach the princess */
 void path(struct node *n) {
     struct node *newn = n;
     int i = 0;
@@ -204,6 +206,7 @@ void path(struct node *n) {
     }
 }
 
+/* This function decodes the shortest path and will print it*/
 void print_shortest_path(char *string) {
     int i;
     printf("Path --> ");
@@ -227,6 +230,7 @@ void print_shortest_path(char *string) {
     printf("\n");
 }
 
+/* The main function will take dimension of the box as commandline argument*/
 int main(int argc, char **argv) {
 
     board Board;
