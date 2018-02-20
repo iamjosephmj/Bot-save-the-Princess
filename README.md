@@ -21,7 +21,7 @@ another example,
 - - B
 ```
 - Here '/' means Block and '-' means free path.
-- The results will be in the format 
+- The results will be in the format(states the movement of the Bot):
 
 for the first example:
 ```
